@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styles from "./CheckIn.module.css";
-import axios from "axios";
+import axios from '../../axios/axiosInstance';
 
-const BASE_URL = "http://localhost:3001";
+
 const CHECK_IN_API = "/check-in";
 
 function CheckIn() {
@@ -19,7 +19,7 @@ function CheckIn() {
         total: 1,
       };
       try {
-        await axios.post(`${BASE_URL}${CHECK_IN_API}`, json);
+        await axios.post(`${CHECK_IN_API}`, json);
         alert("Check in submitted successfully!");
         setCheckIn("");
         setEmail("");

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from '../../axios/axiosInstance';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
 import styles from "./Activities.module.css";
 
-const BASE_URL = "http://localhost:3001";
+
 const ACTIVITIES_API = "/activities";
 
 function Activities() {
@@ -18,7 +18,7 @@ function Activities() {
           email: email,
         };
 
-        const response = await axios.post(`${BASE_URL}${ACTIVITIES_API}`, json);
+        const response = await axios.post(`${ACTIVITIES_API}`, json);
         setData(response.data);
       }
     };
@@ -29,24 +29,24 @@ function Activities() {
     const charts = [];
     if (data) {
       const weekActivities = [
-        { name: "Threadmill", value: data.threadmillWeek, color: "#008080" },
-        { name: "Cycling", value: data.cyclingWeek, color: "#FF6347" },
-        { name: "Stair Mach", value: data.stairMachinesWeek, color: "#228B22" },
-        { name: "Weight Training", value: data.weightTrainingWeek, color: "#8B008B" },
+        { name: "Threadmill", Threadmill: data.threadmillWeek, color: "#008080" },
+        { name: "Cycling", Cycling: data.cyclingWeek, color: "#8884d8" },
+        { name: "StairMach", StairMach: data.stairMachinesWeek, color: "#228B22" },
+        { name: "WeightTraining", WeightTraining: data.weightTrainingWeek, color: "#8B008B" },
       ];
 
       const monthActivities = [
-        { name: "Threadmill", value: data.threadmillMonth, color: "#008080" },
-        { name: "Cycling", value: data.cyclingMonth, color: "#FF6347" },
-        { name: "Stair Mach", value: data.stairMachinesMonth, color: "#228B22" },
-        { name: "Weight Training", value: data.weightTrainingMonth, color: "#8B008B" },
+        { name: "Threadmill", Threadmill: data.threadmillMonth, color: "#008080" },
+        { name: "Cycling", Cycling: data.cyclingMonth, color: "#8884d8" },
+        { name: "StairMach", StairMach: data.stairMachinesMonth, color: "#228B22" },
+        { name: "WeightTraining", WeightTraining: data.weightTrainingMonth, color: "#8B008B" },
       ];
 
       const ninetyDaysActivities = [
-        { name: "Threadmill", value: data.threadmillNinetyDays, color: "#008080" },
-        { name: "Cycling", value: data.cyclingNinetyDays, color: "#FF6347" },
-        { name: "Stair Mach", value: data.stairMachinesNinetyDays, color: "#228B22" },
-        { name: "Weight Training", value: data.weightTrainingNinetyDays, color: "#8B008B" },
+        { name: "Threadmill", Threadmill: data.threadmillNinetyDays, color: "#008080" },
+        { name: "Cycling", Cycling: data.cyclingNinetyDays, color: "#8884d8" },
+        { name: "StairMach", StairMach: data.stairMachinesNinetyDays, color: "#228B22" },
+        { name: "WeightTraining", WeightTraining: data.weightTrainingNinetyDays, color: "#8B008B" },
       ];
 
       charts.push(
@@ -98,7 +98,10 @@ function CustomBarChart(props) {
         <Tooltip />
         <Legend />
         
-        <Bar dataKey="value" fill="#30b8a5" />
+        <Bar dataKey={activities[0].name} fill={activities[0].color} />
+        <Bar dataKey={activities[1].name} fill={activities[1].color} />
+        <Bar dataKey={activities[2].name} fill={activities[2].color} />
+        <Bar dataKey={activities[3].name} fill={activities[3].color} />
       </BarChart>
     </div>
     

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios from '../../axios/axiosInstance';
 import styles from "./BookedClass.module.css";
 
-const BASE_URL = "http://localhost:3001";
+
 const BOOKED_CLASS_API = "/booked-class/fetch";
 
 function BookedClass() {
@@ -16,7 +16,7 @@ function BookedClass() {
           "email": email
         };
 
-        const response = await axios.post(`${BASE_URL}${BOOKED_CLASS_API}`, json);
+        const response = await axios.post(`${BOOKED_CLASS_API}`, json);
         setBookedClasses(response.data);
       }
     };

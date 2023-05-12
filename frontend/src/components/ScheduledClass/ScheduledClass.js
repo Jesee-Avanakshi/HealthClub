@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios from '../../axios/axiosInstance';
 import styles from "./ScheduledClass.module.css";
 
-const BASE_URL = "http://localhost:3001";
+
 const SCHEDULED_CLASS_API = "/scheduled-class";
 const INSERT_INDIVIDUAL_CLASS_API = '/booked-class';
 
@@ -16,7 +16,7 @@ function ScheduledClass() {
         date: date
       };
 
-      const response = await axios.post(`${BASE_URL}${SCHEDULED_CLASS_API}`, json);
+      const response = await axios.post(`${SCHEDULED_CLASS_API}`, json);
       setScheduledClasses(response.data);
     }
   };
@@ -35,7 +35,7 @@ function ScheduledClass() {
     };
 
     try {
-      const response = await axios.post(`${BASE_URL}${INSERT_INDIVIDUAL_CLASS_API}`, booking);
+      const response = await axios.post(`${INSERT_INDIVIDUAL_CLASS_API}`, booking);
       console.log(response.data);
       alert("Booking Successful!!!");
     } catch (error) {

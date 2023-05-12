@@ -1,9 +1,9 @@
 
 import React, { useState } from "react";
-import axios from "axios";
+import axios from '../../axios/axiosInstance';
 import styles from "./ClassSchedule.module.css";
 
-const BASE_URL = "http://localhost:3001";
+
 const ENROLL_API = "/class-schedule";
 
 function ClassSchedule() {
@@ -33,7 +33,7 @@ function ClassSchedule() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(`${BASE_URL}${ENROLL_API}`, {
+      const response = await axios.post(`${ENROLL_API}`, {
         title,
         city,
         date,

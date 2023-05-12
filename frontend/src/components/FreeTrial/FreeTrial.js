@@ -1,8 +1,8 @@
 import React, { useState, useEffect  } from "react";
-import axios from "axios";
+import axios from '../../axios/axiosInstance';
 import styles from "./FreeTrial.module.css";
 
-const BASE_URL = "http://localhost:3001";
+
 const FREE_TRIAL_API = "/free-trial";
 
 function FreeTrial() {
@@ -31,7 +31,7 @@ function FreeTrial() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(`${BASE_URL}${FREE_TRIAL_API}`, {
+      const response = await axios.post(`${FREE_TRIAL_API}`, {
         name,
         email,
         contactNumber,
@@ -51,7 +51,7 @@ function FreeTrial() {
 
   const fetchMembers = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}${FREE_TRIAL_API}`);
+      const response = await axios.get(`${FREE_TRIAL_API}`);
       setMembers(response.data);
     } catch (error) {
       console.error(error);

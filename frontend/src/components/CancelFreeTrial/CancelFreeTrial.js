@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from '../../axios/axiosInstance';
 import styles from './CancelFreeTrial.module.css';
 
-const BASE_URL = 'http://localhost:3001';
 const CANCEL_FREE_TRIAL_API = '/cancel-free-trial';
 
 const CancelFreeTrial = () => {
@@ -11,7 +10,7 @@ const CancelFreeTrial = () => {
 
   const handleCancel = async () => {
     try {
-      const response = await axios.post(`${BASE_URL}${CANCEL_FREE_TRIAL_API}`, { email });
+      const response = await axios.post(`${CANCEL_FREE_TRIAL_API}`, { email });
       alert(response.data.message);
       setEmail('');
       setError(null);

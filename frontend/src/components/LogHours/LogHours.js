@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from '../../axios/axiosInstance';
 import styles from "./LogHours.module.css";
 
-const BASE_URL = "http://localhost:3001";
+
 const LOG_HOURS_API = "/log-hours";
 
 function LogHours() {
@@ -25,7 +25,7 @@ function LogHours() {
         weight_training: parseFloat(weightTraining),
       },
     };
-    const response = await axios.post(`${BASE_URL}${LOG_HOURS_API}`, data);
+    const response = await axios.post(`${LOG_HOURS_API}`, data);
     console.log(response.data);
     alert("Successfully logged hours!!!");
   };

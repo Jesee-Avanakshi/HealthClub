@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from '../../axios/axiosInstance';
 import styles from "./HoursSpent.module.css";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
-const BASE_URL = "http://localhost:3001";
+
 const RECORDS_API = "/hoursspent";
 const RECORDS_TIME_API = "/hoursspent/time";
 
@@ -15,13 +15,13 @@ function HoursSpentGraph() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}${RECORDS_API}`);
+        const response = await axios.get(`${RECORDS_API}`);
         setChartData(response.data);
       } catch (error) {
         setError("An error occurred while fetching data");
       }
       try {
-        const response = await axios.get(`${BASE_URL}${RECORDS_TIME_API}`);
+        const response = await axios.get(`${RECORDS_TIME_API}`);
         setChartTimeData(response.data);
       } catch (error) {
         setError("An error occurred while fetching data");

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from '../../axios/axiosInstance';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
 import styles from "./AdminPanel.module.css";
 
-const BASE_URL = "http://localhost:3001";
+
 const DASHBOARD_API = "/admin-panel";
 
 function AdminPanel() {
@@ -13,8 +13,8 @@ function AdminPanel() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(`${BASE_URL}${DASHBOARD_API}`);
-        const response = await axios.get(`${BASE_URL}${DASHBOARD_API}`);
+        console.log(`${DASHBOARD_API}`);
+        const response = await axios.get(`${DASHBOARD_API}`);
         setData(response.data.result);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -28,7 +28,12 @@ function AdminPanel() {
     if (data) {
       const currentDate = new Date().toISOString().slice(0, 10); // Get the current date in YYYY-MM-DD format
       const filteredData = data.filter((item) => item.date === currentDate);
-      return filteredData;
+      const newData = [{
+        date: filteredData[0].date,
+        classes: filteredData[0].classnum
+      }];
+
+      return newData;
     }
     return [];
   };
@@ -37,7 +42,11 @@ function AdminPanel() {
     if (data) {
       const currentDate = new Date().toISOString().slice(0, 10); // Get the current date in YYYY-MM-DD format
       const filteredData = data.filter((item) => item.date > currentDate);
-      const sortedData = filteredData.sort((a, b) => a.date.localeCompare(b.date)); // Sort by date in ascending order
+      const modifiedData = filteredData.map(obj => {
+        return { date: obj.date, classes: obj.classnum };
+      });
+      const sortedData = modifiedData.sort((a, b) => a.date.localeCompare(b.date));
+
       return sortedData;
     }
     return [];
@@ -59,7 +68,7 @@ function AdminPanel() {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="classnum" fill="#E9A95E" />
+            <Bar dataKey="classes" fill="#8884d8" />
           </BarChart>
         </div>
         <div className={styles.graph}>
@@ -70,7 +79,7 @@ function AdminPanel() {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey="classnum" fill="#EEBF2F" />
+              <Bar dataKey="classes" fill="#EEBF2F" />
             </BarChart>
           </div>
         
