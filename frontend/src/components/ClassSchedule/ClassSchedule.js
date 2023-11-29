@@ -1,8 +1,7 @@
 
 import React, { useState } from "react";
-import axios from '../../axios/axiosInstance';
+import axios from "axios";
 import styles from "./ClassSchedule.module.css";
-
 
 const ENROLL_API = "/class-schedule";
 
@@ -52,6 +51,9 @@ function ClassSchedule() {
     }
   };
 
+  // Get the current date in the required format (YYYY-MM-DD)
+  const currentDate = new Date().toISOString().split("T")[0];
+
   return (
     <div className={styles.container}>
     <div className={styles.container}>
@@ -70,7 +72,7 @@ function ClassSchedule() {
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="Date">Date:</label>
-          <input type="Date" id="date" value={date} onChange={handleDateChange} required />
+          <input type="Date" id="date" value={date} onChange={handleDateChange} min={currentDate} required />
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="Time">Time:</label>

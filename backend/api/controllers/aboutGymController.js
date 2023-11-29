@@ -1,4 +1,4 @@
-const aboutGym = require('../models/aboutGym');
+const aboutGym = require('../models/AboutGym');
 
 /**
  * 

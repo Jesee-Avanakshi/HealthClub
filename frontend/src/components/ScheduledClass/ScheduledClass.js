@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from '../../axios/axiosInstance';
+import axios from "axios";
 import styles from "./ScheduledClass.module.css";
-
 
 const SCHEDULED_CLASS_API = "/scheduled-class";
 const INSERT_INDIVIDUAL_CLASS_API = '/booked-class';
@@ -43,6 +42,10 @@ function ScheduledClass() {
     }
   };
 
+  // Get the current date in the required format (YYYY-MM-DD)
+  const currentDate = new Date().toISOString().split("T")[0];
+
+
   return (
     <div className={styles.pagecontainer}>
     <div className={styles.container}>
@@ -53,6 +56,7 @@ function ScheduledClass() {
         value={date}
         onChange={(e) => setDate(e.target.value)}
         className={styles.dateInput}
+        min={currentDate}
       />
       <table className={styles.table}>
         <thead>
